@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Thryvo.Contracts;
+using Thryvo.Data;
 using Thryvo.Models;
 
 namespace Thryvo.Repository
 {
-    public class LeaveAllocationRepository : IRepositoryBase<LeaveAllocation>
+    public class LeaveAllocationRepository : ILeaveAllocationRepository
     {
+        private readonly ApplicationDbContext _db;
+
+        public LeaveAllocationRepository(ApplicationDbContext db)
+        {
+            _db = db;
+        }
         public bool Create(LeaveAllocation entity)
         {
             throw new NotImplementedException();
