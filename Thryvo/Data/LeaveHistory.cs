@@ -25,6 +25,5 @@ namespace Thryvo.Models
         [ForeignKey("ApprovedById")]
         public Employee ApprovedBy { get; set; }
         public string ApprovedById { get; set; }
-
     }
 }

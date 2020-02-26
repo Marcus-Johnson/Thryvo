@@ -12,6 +12,8 @@ using Thryvo.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Thryvo.Contracts;
+using Thryvo.Repository;
 
 namespace Thryvo
 {
@@ -30,6 +32,9 @@ namespace Thryvo
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
+            services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
