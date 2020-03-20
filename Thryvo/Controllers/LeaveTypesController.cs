@@ -86,16 +86,27 @@ namespace Thryvo.Controllers
         // POST: LeaveTypes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(LeaveTypeVM model)
         {
             try
             {
                 // TODO: Add update logic here
-
+                if (!ModelState.IsValid)
+                {
+                    return View(model); 
+                }
+                var leaveType = _mapper.Map<LeaveType>(model);
+                var isSuccess = _repo.Update(leaveType);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "L102, Something went wrong, please try again later.");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                ModelState.AddModelError("", "L109, Something went wrong, please try again later.");
                 return View();
             }
         }
