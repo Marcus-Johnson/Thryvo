@@ -74,7 +74,13 @@ namespace Thryvo.Controllers
         // GET: LeaveTypes/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (!_repo.isExists(id))
+            {
+                return NotFound(); 
+            }
+            var leaveType = _repo.FindById(id);
+            var model = _mapper.Map<LeaveTypeVM>(leaveType);    
+            return View(model);
         }
 
         // POST: LeaveTypes/Edit/5

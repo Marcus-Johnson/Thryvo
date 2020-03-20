@@ -18,6 +18,6 @@ namespace Thryvo.Data
         public DbSet<LeaveHistory> LeaveHistories { get; set; }
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
-        public DbSet<Thryvo.Models.DetailsLeaveTypeVM> DetailsLeaveTypeVM { get; set; }
+        public DbSet<Thryvo.Models.LeaveTypeVM> DetailsLeaveTypeVM { get; set; }
     }
 }
