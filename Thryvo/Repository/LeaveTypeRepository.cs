@@ -36,7 +36,8 @@ namespace Thryvo.Repository
 
         public LeaveType FindById(int id)
         {
-            throw new NotImplementedException();
+            var leaveType = _db.LeaveTypes.Find(id);
+            return leaveType;
         }
 
         public ICollection<LeaveType> GetEmployeesByLeaveType(int id)
@@ -44,14 +45,21 @@ namespace Thryvo.Repository
             throw new NotImplementedException();
         }
 
-        public bool Save()
+        public bool isExists(int id)
         {
             throw new NotImplementedException();
         }
 
+        public bool Save()
+        {
+            var changes = _db.SaveChanges();
+            return changes > 0;
+        }
+
         public bool Update(LeaveType entity)
         {
-            throw new NotImplementedException();
+            _db.LeaveTypes.Update(entity);
+            return Save(); 
         }
     }
 }

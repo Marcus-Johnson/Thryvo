@@ -25,7 +25,7 @@ namespace Thryvo.Controllers
         public ActionResult Index()
         {
             var leavetypes = _repo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveType>, List<DetailsLeaveTypeVM>>(leavetypes);
+            var model = _mapper.Map<List<LeaveType>, List<LeaveTypeVM>>(leavetypes);
             return View(model);
         }
 
@@ -44,17 +44,30 @@ namespace Thryvo.Controllers
         // POST: LeaveTypes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LeaveTypeVM model)
         {
             try
             {
                 // TODO: Add insert logic here
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var leaveType = _mapper.Map<LeaveType>(model);
+                leaveType.DateCreated = DateTime.Now; 
+                var isSuccess = _repo.Create(leaveType);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "L60, Something went wrong, please try again later.");
+                    return View(model);
+                }
 
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "L69, Something went wrong, please try again later.");
+                return View(model);
             }
         }
 

@@ -18,32 +18,43 @@ namespace Thryvo.Repository
         }
         public bool Create(LeaveHistory entity)
         {
-            throw new NotImplementedException();
+            _db.LeaveHistories.Add(entity);
+            return Save(); 
         }
 
         public bool Delete(LeaveHistory entity)
         {
-            throw new NotImplementedException();
+            _db.LeaveHistories.Remove(entity);
+            return Save(); 
         }
 
         public ICollection<LeaveHistory> FindAll()
         {
-            throw new NotImplementedException();
+            var LeaveHistorys = _db.LeaveHistories.ToList();
+            return LeaveHistorys; 
         }
 
         public LeaveHistory FindById(int id)
+        {
+            var LeaveHistory = _db.LeaveHistories.Find(id);
+            return LeaveHistory; 
+        }
+
+        public bool isExists(int id)
         {
             throw new NotImplementedException();
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            var changes = _db.SaveChanges();
+            return changes > 0;
         }
 
         public bool Update(LeaveHistory entity)
         {
-            throw new NotImplementedException();
+            _db.LeaveHistories.Update(entity);
+            return Save();
         }
     }
 }
