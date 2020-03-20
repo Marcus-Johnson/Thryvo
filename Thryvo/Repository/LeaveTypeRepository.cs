@@ -47,7 +47,8 @@ namespace Thryvo.Repository
 
         public bool isExists(int id)
         {
-            throw new NotImplementedException();
+            var exists = _db.LeaveTypes.Any(q => q.Id == id);
+            return exists; 
         }
 
         public bool Save()
