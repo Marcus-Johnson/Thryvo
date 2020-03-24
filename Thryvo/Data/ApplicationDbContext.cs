@@ -19,5 +19,6 @@ namespace Thryvo.Data
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<Thryvo.Models.LeaveTypeVM> DetailsLeaveTypeVM { get; set; }
+        public DbSet<Thryvo.Models.EmployeeVM> EmployeeVM { get; set; }
     }
 }
