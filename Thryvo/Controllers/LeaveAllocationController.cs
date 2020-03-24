@@ -19,11 +19,11 @@ namespace Thryvo.Controllers
         private readonly ILeaveTypeRepository _typerepo;
         private readonly ILeaveAllocationRepository _allowrepo;
         private readonly IMapper _mapper;
-        private readonly UserManager<IdentityUser> _userManager; 
+        private readonly UserManager<Employee> _userManager; 
 
         public LeaveAllocationController(
             ILeaveTypeRepository typerepo,
-            UserManager<IdentityUser> userManager, 
+            UserManager<Employee> userManager, 
             IMapper mapper, 
             ILeaveAllocationRepository allowrepo)
         {
@@ -67,6 +67,13 @@ namespace Thryvo.Controllers
                 _allowrepo.Create(leaveallocation);
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ListEmployees()
+        {
+            var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
+            var model = _mapper.Map<List<EmployeeVM>>(employees);
+            return View(model);
         }
 
         // GET: LeaveAllocation/Details/5

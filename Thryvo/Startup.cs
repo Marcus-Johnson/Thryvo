@@ -16,6 +16,7 @@ using Thryvo.Contracts;
 using Thryvo.Repository;
 using AutoMapper;
 using Thryvo.Mappings;
+using Thryvo.Models;
 
 namespace Thryvo
 {
@@ -40,7 +41,7 @@ namespace Thryvo
 
             services.AddAutoMapper(typeof(Maps));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            services.AddDefaultIdentity<Employee>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -52,7 +53,7 @@ namespace Thryvo
         public void Configure(
             IApplicationBuilder app,
             IWebHostEnvironment env,
-            UserManager<IdentityUser> userManager,
+            UserManager<Employee> userManager,
             RoleManager<IdentityRole> roleManager
             )
         {
